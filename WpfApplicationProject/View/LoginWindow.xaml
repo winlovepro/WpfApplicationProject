@@ -1,0 +1,123 @@
+﻿<Window x:Class="WpfApplicationProject.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplicationProject.View"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:WpfApplicationProject.UserControls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        DataContext="{StaticResource LoginVM}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Opacity="0.9"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Images/Logo.ico"
+        Name="loginWindow"
+        Title="Đăng Nhập Hệ Thống" Height="200" Width="400">
+
+    <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Loaded">
+
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"
+                                   CommandParameter="{Binding ElementName=loginWindow}"/>
+
+        </i:EventTrigger>
+
+    </i:Interaction.Triggers>
+    
+    <Border x:Name="brdContainer" Style="{StaticResource BorderStyle}"
+             FocusManager.FocusedElement="{Binding ElementName=txtUserName}">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="auto"></RowDefinition>
+
+                <RowDefinition Height="auto"></RowDefinition>
+
+                <RowDefinition Height="auto"></RowDefinition>
+
+                <RowDefinition></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <uc:ControlBar ></uc:ControlBar>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135*"/>
+                    <ColumnDefinition Width="64*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtUserName"                         
+                         materialDesign:HintAssist.Hint="Nhập tài khoản"
+                         Margin="30 10 30 0"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.ColumnSpan="2" >
+                    
+                </TextBox>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+
+                <PasswordBox x:Name="txtPassword"
+                             Margin="30 10 30 0"
+                             FocusManager.FocusedElement="{Binding}"
+                             materialDesign:HintAssist.Hint="Nhập mật khẩu"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                    
+                </PasswordBox>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnLogin" 
+                        IsDefault="True"
+                        Width="130"
+                        Content="Đăng Nhập"
+                        Grid.Column="0"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=loginWindow}"
+                        ToolTip="Đăng nhập hệ thống">
+                </Button>
+
+                <Button x:Name="btnExit" 
+                        Width="130"
+                        Content="Thoát"
+                        Grid.Column="1"
+                        Background="#FF5722"
+                        BorderBrush="#FF5722"
+                        Command="{Binding CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=loginWindow}"
+                        ToolTip="Thoát chương trình">
+                </Button>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</Window>
